@@ -151,7 +151,6 @@ function dragAndDrop() {
             e.preventDefault();
             let dragged_element_id = e.dataTransfer.getData('text/plain');
             let dragged_element = document.getElementById(dragged_element_id);
-            console.log(dragged_element.parentElement)
             if (dragged_element.parentElement == not_used_canvas) {
                 canvas.appendChild(dragged_element)
             }
@@ -218,16 +217,13 @@ class operateBlock {
     #deleted_element = []
     setCandidate(data) {
         if (this.#id != "") {
-            console.log(new Date().getTime() + ":" + this.#last_execution);
+            console.log(`選択中のブロックが変更されました[前: ${this.#id} 今:${data.id}]`)
             document.getElementById(this.#id).style.backgroundColor = "#ffffff00"
-            console.log("bbb" + data.innerHTML)
             this.#id = data.id;
             data.style.backgroundColor = "lightgray"
         }
         else if (this.#id == "") {
             this.#last_execution = new Date().getTime();
-            console.log(new Date().getTime())
-            console.log(data);
             this.#id = data.id;
             document.getElementById(data.id).style.backgroundColor = "lightgray"
         }
@@ -262,7 +258,6 @@ function clickedBlock(data) {
     thisOperateBlock.setCandidate(data);
 }
 
-console.log(new aboutThatButton(3).getNumberInColor() + ":" + new aboutThatButton(3).getColor())
 addEventListener("load", () => {
     buttonCreate();
     const selectButton = new selectElement()
@@ -321,9 +316,6 @@ function dataForCreateElement() {
     this.onclick = "";
 }
 
-const stopPropagation = (event) => {
-    event.stopPropagation();
-}
 //データ部
 
 function textOfBlockAndButton() {
@@ -334,10 +326,10 @@ function textOfBlockAndButton() {
     for (let i = 0; i < box_color_list.length; i++) {
         switch (box_color_list[i]) {
             case "black":
-                box[box_color_list[i]] = `<span oncick="stopPropagation(event)" class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
+                box[box_color_list[i]] = `<span  class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
                 break;
             default:
-                box[box_color_list[i]] = `<span onclick="stopPropagation(event)" class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
+                box[box_color_list[i]] = `<span class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
                 break;
         }
     }
