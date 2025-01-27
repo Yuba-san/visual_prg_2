@@ -94,6 +94,9 @@ function operateElement() {
         for (let i = 0; i < attribute_template.length; i++) {
             if (node_data[attribute_template[i]] != "" && attribute_template[i] != "to_push_before" && attribute_template[i] != "type") {
                 switch (attribute_template[i]) {
+                    case "onclick":
+                        new_node.setAttribute('onclick', `clickedBlock(${node_data.id})`);
+                        break;
                     case "path":
                         path = this.getPath(node_data.path);
                         break;
@@ -131,7 +134,11 @@ function dragAndDrop() {
         const all_box = new selectElement().allQuerySelect(".box");
         const all_block = new selectElement().allQuerySelect(".block");
         const not_used_canvas = document.getElementById("not_used");
+        const canvas = document.getElementById("canvas");
         not_used_canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        })
+        canvas.addEventListener('dragover', (e) => {
             e.preventDefault();
         })
         not_used_canvas.addEventListener('drop', (e) => {
@@ -139,6 +146,16 @@ function dragAndDrop() {
             let dragged_element_id = e.dataTransfer.getData('text/plain');
             let dragged_element = document.getElementById(dragged_element_id);
                 not_used_canvas.appendChild(dragged_element)
+        });
+        canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            let dragged_element_id = e.dataTransfer.getData('text/plain');
+            let dragged_element = document.getElementById(dragged_element_id);
+            console.log(dragged_element.parentElement)
+            if(dragged_element.parentElement == not_used_canvas)
+            {
+                canvas.appendChild(dragged_element)
+            }
         });
         all_box.forEach((element) => {
             element.addEventListener('dragover', (e) => {
@@ -150,7 +167,9 @@ function dragAndDrop() {
                 let dragged_element = document.getElementById(dragged_element_id);
                 if (!element.hasChildNodes() || dragged_element.classList[2] == "black") {
                     if (element.classList[2] == dragged_element.classList[2]) {
+                        dragged_element.setAttribute('onclick', `clickedBlock(${dragged_element.id})`);
                         element.appendChild(dragged_element)
+                        element.parentElement.setAttribute('onclick', ``);
                     }
                 }
             });
@@ -198,8 +217,14 @@ class operateBlock {
     #id = "";
     #deleted_element = []
     setCandidate(data) {
+        if(this.#id != "")
+        {
+            document.getElementById(this.#id).style.backgroundColor = "#ffffff00"
+        }
+
         console.log(data);
         this.#id = data.id;
+        document.getElementById(data.id).style.backgroundColor = "lightgray"
     }
     move_up() {
         const element = document.getElementById(this.#id);
@@ -211,37 +236,36 @@ class operateBlock {
         element.parentElement.insertBefore(element, element.nextSibling.nextSibling)
     }
 }
-
+const thisOperateBlock = new operateBlock;
+const id = ["move_up", "move_down"];
+for (let i = 0; i < id.length; i++) {
+    this_button = document.getElementById(id[i]);
+    this_button.addEventListener("click", () => {
+        switch(id[i])
+        {
+            case  "move_up":
+                thisOperateBlock.move_up()
+                break;
+            case  "move_down":
+                thisOperateBlock.move_down()
+                break;
+        }
+    }
+    )
+}
+function clickedBlock(id)
+{
+    thisOperateBlock.setCandidate(document.getElementById(id));
+}
 
 console.log(new aboutThatButton(3).getNumberInColor() + ":" + new aboutThatButton(3).getColor())
 addEventListener("load", () => {
-    id = ["move_up", "move_down"];
-    const thisOperateBlock = new operateBlock;
-    for (let i = 0; i < id.length; i++) {
-        this_button = document.getElementById(id[i]);
-        this_button.addEventListener("click", () => {
-            switch(id[i])
-            {
-                case  "move_up":
-                    thisOperateBlock.move_up()
-                    break;
-                case  "move_down":
-                    thisOperateBlock.move_down()
-                    break;
-            }
-        }
-        )
-    }
     buttonCreate();
     const selectButton = new selectElement()
     const add_block_buttons = selectButton.allQuerySelect(".add_block_button")
     add_block_buttons.forEach((element) =>
         element.addEventListener("click", () => {
             const new_element = new operateElement().create(new dataForBlock(element.id))
-            new_element.addEventListener("click", () => {
-                thisOperateBlock.setCandidate(new_element);
-                
-            })
             new dragAndDrop().refresh();
         })
     );
@@ -266,6 +290,7 @@ function dataForBlock(num) {
     else {
         this.className = this.getColor(num) + "_block block " + this.getColor(num);
     }
+    this.onclick = `clickedBlock(${this.id})`
     this.innerHTML = new textOfBlockAndButton()[this.getColor()][this.getNumberInColor()].block
 }
 function dataForButton(num) {
@@ -289,6 +314,7 @@ function dataForCreateElement() {
     this.path = "";
     this.to_push_before = "";
     this.draggable = "";
+    this.onclick = "";
 }
 
 //データ部

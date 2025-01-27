@@ -211,16 +211,18 @@ body{
 {
     display: inline-block;
     border: dashed black;
-    min-width: 49vh;
+    min-width: 59vh;
     min-height: 4.7vh;
     position: relative;
     right: 3px;
     bottom: 3px;
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
 .black_block
 {
     border: solid black;
-    width: 50vh
+    width: 60vh
 
 }
 .red_block
@@ -255,13 +257,13 @@ body{
 {
     border : solid rgba(255, 255, 255, 0);
 }
-.clicked
-{
-    background-color: rgb(210, 255, 255);
-}
 .text_box
 {
     border: solid rgba(255, 255, 255, 0);
     background: rgba(255, 255, 255, 0);
     width: 2.5vh;
+}
+.active
+{
+    background-color: rgb(255, 255, 169);
 }
