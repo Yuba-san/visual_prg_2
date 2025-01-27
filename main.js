@@ -145,15 +145,14 @@ function dragAndDrop() {
             e.preventDefault();
             let dragged_element_id = e.dataTransfer.getData('text/plain');
             let dragged_element = document.getElementById(dragged_element_id);
-                not_used_canvas.appendChild(dragged_element)
+            not_used_canvas.appendChild(dragged_element)
         });
         canvas.addEventListener('drop', (e) => {
             e.preventDefault();
             let dragged_element_id = e.dataTransfer.getData('text/plain');
             let dragged_element = document.getElementById(dragged_element_id);
             console.log(dragged_element.parentElement)
-            if(dragged_element.parentElement == not_used_canvas)
-            {
+            if (dragged_element.parentElement == not_used_canvas) {
                 canvas.appendChild(dragged_element)
             }
         });
@@ -167,9 +166,9 @@ function dragAndDrop() {
                 let dragged_element = document.getElementById(dragged_element_id);
                 if (!element.hasChildNodes() || dragged_element.classList[2] == "black") {
                     if (element.classList[2] == dragged_element.classList[2]) {
-                        dragged_element.setAttribute('onclick', `clickedBlock(${dragged_element.id})`);
+                        thisOperateBlock.setCandidate(dragged_element);
                         element.appendChild(dragged_element)
-                        element.parentElement.setAttribute('onclick', ``);
+
                     }
                 }
             });
@@ -215,16 +214,23 @@ function buttonCreate() {
 }
 class operateBlock {
     #id = "";
+    #last_execution = 0;
     #deleted_element = []
     setCandidate(data) {
-        if(this.#id != "")
-        {
+        if (this.#id != "") {
+            console.log(new Date().getTime() + ":" + this.#last_execution);
             document.getElementById(this.#id).style.backgroundColor = "#ffffff00"
+            console.log("bbb" + data.innerHTML)
+            this.#id = data.id;
+            data.style.backgroundColor = "lightgray"
         }
-
-        console.log(data);
-        this.#id = data.id;
-        document.getElementById(data.id).style.backgroundColor = "lightgray"
+        else if (this.#id == "") {
+            this.#last_execution = new Date().getTime();
+            console.log(new Date().getTime())
+            console.log(data);
+            this.#id = data.id;
+            document.getElementById(data.id).style.backgroundColor = "lightgray"
+        }
     }
     move_up() {
         const element = document.getElementById(this.#id);
@@ -241,21 +247,19 @@ const id = ["move_up", "move_down"];
 for (let i = 0; i < id.length; i++) {
     this_button = document.getElementById(id[i]);
     this_button.addEventListener("click", () => {
-        switch(id[i])
-        {
-            case  "move_up":
+        switch (id[i]) {
+            case "move_up":
                 thisOperateBlock.move_up()
                 break;
-            case  "move_down":
+            case "move_down":
                 thisOperateBlock.move_down()
                 break;
         }
     }
     )
 }
-function clickedBlock(id)
-{
-    thisOperateBlock.setCandidate(document.getElementById(id));
+function clickedBlock(data) {
+    thisOperateBlock.setCandidate(data);
 }
 
 console.log(new aboutThatButton(3).getNumberInColor() + ":" + new aboutThatButton(3).getColor())
@@ -283,7 +287,7 @@ function dataForBlock(num) {
     this.draggable = true;
     aboutThatButton.call(this, num)
     console.log(num)
-    this.id = "#" + new Date().getTime();
+    this.id = "#block" + new Date().getTime();
     if (this.getColor(num) == "purple" || this.getColor(num) == "aqua") {
         this.className = "black_block block black"
     }
@@ -317,6 +321,9 @@ function dataForCreateElement() {
     this.onclick = "";
 }
 
+const stopPropagation = (event) => {
+    event.stopPropagation();
+}
 //データ部
 
 function textOfBlockAndButton() {
@@ -327,10 +334,10 @@ function textOfBlockAndButton() {
     for (let i = 0; i < box_color_list.length; i++) {
         switch (box_color_list[i]) {
             case "black":
-                box[box_color_list[i]] = `<span class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
+                box[box_color_list[i]] = `<span oncick="stopPropagation(event)" class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
                 break;
             default:
-                box[box_color_list[i]] = `<span class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
+                box[box_color_list[i]] = `<span onclick="stopPropagation(event)" class='${box_color_list[i]}_box box ${box_color_list[i]}'></span>`
                 break;
         }
     }
