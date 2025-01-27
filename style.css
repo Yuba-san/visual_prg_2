@@ -1,0 +1,267 @@
+:root {
+    --box_and_block_green_width: 40vh;
+    --box_and_block_green_height: 5vh;
+    --box_and_block_blue_width: 3.5vh;
+    --box_and_block_blue_height: 3.5vh;
+    --box_and_block_yellow_width: 18vh;
+    --box_and_block_yellow_height: 3.5vh;
+    --box_and_block_red_width: 21vh;
+    --box_and_block_red_height: 5vh;
+}
+body{
+    font-size: 3vh;
+}
+.normal_button
+{
+    width: 26vh;
+    height: 5.25vh;
+    font-size: 1.6vh;
+}
+.move_button
+{
+    background-color: rgb(136, 196, 124);
+}
+.undo_button
+{
+    background-color: rgb(37, 84, 170);   
+    color: white;
+}
+.delete_button
+{
+    background-color: rgb(170, 37, 37);   
+    color: white;
+}
+.move_button:hover
+{
+    background-color: rgb(103, 171, 89);
+}
+.undo_button:hover
+{
+    background-color: rgb(24, 68, 151);   
+    color: white;
+}
+.delete_button:hover
+{
+    background-color: rgb(157, 29, 29);   
+    color: white;
+}
+.move_button:active
+{
+    background-color: rgb(89, 159, 75);
+}
+.undo_button:active
+{
+    background-color: rgb(17, 60, 139);   
+    color: white;
+}
+.delete_button:active
+{
+    background-color: rgb(148, 20, 20);   
+    color: white;
+}
+.canvas{
+    border : 2px solid gray;
+    min-width: 30vw;
+    resize: both;
+    height: 80vh;
+    display: inline-block;
+    overflow-y: scroll;
+    vertical-align: top;
+}
+#not_used{
+    background-color: gray;
+    background-image: url("./delete.png");
+}
+.add_block_button{
+    width: 26vh;
+    height: 5.25vh;
+    font-size: 1.6vh;
+    display: block;
+}
+.button_row
+{
+    display:inline-block;
+    vertical-align: top;
+    position: relative;
+    
+}
+.button_purple{
+    background-color: rgb(222, 213, 229);
+    border : 1px solid rgb(156, 108, 148);
+    border-radius: 3px;
+}
+.button_purple:hover{
+    background-color: rgb(198, 181, 212);
+}
+.button_purple:active{
+    background-color: rgb(179, 156, 197);
+}
+.button_aqua{
+    background-color: rgb(213, 228, 229);
+    border : 1px solid rgb(108, 150, 156);
+    border-radius: 3px;    
+}
+.button_aqua:hover{
+    background-color: rgb(187, 209, 211);
+}
+.button_aqua:active{
+    background-color: rgb(153, 182, 184);
+}
+.button_red{
+    background-color: rgb(229, 213, 213);
+    border : 1px solid rgb(156, 108, 108);
+    border-radius: 3px;    
+}
+.button_red:hover{
+    background-color: rgb(210, 187, 187);
+}
+.button_red:active{
+    background-color: rgb(179, 143, 143);
+}
+.button_green{
+    background-color: rgb(215, 229, 213);
+    border : 1px solid rgb(108, 156, 118);
+    border-radius: 3px;    
+}
+.button_green:hover{
+    background-color: rgb(188, 211, 185);
+}
+.button_green:active{
+    background-color: rgb(149, 179, 145);
+}
+.button_blue{
+    background-color: rgb(215, 213, 229);
+    border : 1px solid rgb(114, 108, 156);
+    border-radius: 3px;    
+}
+.button_blue:hover{
+    background-color: rgb(186, 183, 206);
+}
+.button_blue:active{
+    background-color: rgb(147, 143, 177);
+}
+.button_yellow{
+    background-color: rgb(229, 227, 213);
+    border : 1px solid rgb(156, 150, 108);
+    border-radius: 3px;    
+}
+.button_yellow:hover{
+    background-color: rgb(206, 204, 183);
+}
+.button_yellow:active{
+    background-color: rgb(177, 175, 143);
+}
+#place_of_button{
+    height: 80vh;
+    display: inline-block;
+}
+.block
+{
+    padding: 0;
+    margin: 0;
+}
+.block:active
+{
+    background-color: rgb(187, 187, 187);
+}
+.active
+{
+    background-color: rgb(255, 255, 169);
+}
+.box .block{
+    position: relative;
+    right: 3px;
+    bottom: 3px;
+}
+.box .black_block{
+    position: relative;
+    right: 6px;
+    bottom: 6px;
+}
+.box
+{
+    padding: 0;
+    margin: 0;
+}
+.blue_box{
+    display: inline-block;
+    height: var(--box_and_block_blue_height);
+    width: var(--box_and_block_blue_width);
+    border: dashed blue;
+}
+.yellow_box{
+    display: inline-block;
+    height: var(--box_and_block_yellow_height);
+    width: var(--box_and_block_yellow_width);
+    border: dashed #b0b000;
+}
+.red_box{
+    display: inline-block;
+    height: var(--box_and_block_red_height);
+    width: var(--box_and_block_red_width);
+    border: dashed red;
+}
+.green_box{
+    display: inline-block;
+    height: var(--box_and_block_green_height);
+    width: var(--box_and_block_green_width);
+    border: dashed lime;
+}
+.black_box
+{
+    display: inline-block;
+    border: dashed black;
+    min-width: 49vh;
+    min-height: 4.7vh;
+    position: relative;
+    right: 3px;
+    bottom: 3px;
+}
+.black_block
+{
+    border: solid black;
+    width: 50vh
+
+}
+.red_block
+{
+    border: solid red;
+    height: var(--box_and_block_red_height);
+    width: var(--box_and_block_red_width);
+    font-size: 4vh;
+}
+.green_block
+{
+    border: solid lime;
+    height: var(--box_and_block_green_height);
+    width: var(--box_and_block_green_width);
+    min-height: var(--not-black_height);
+
+}
+.blue_block
+{
+    border: solid blue;
+    width: var(--box_and_block_blue_width);
+    height: var(--box_and_block_blue_height);
+    font-size: 3vh;
+}
+.yellow_block
+{
+    border: solid #b0b000;
+    min-height: var(--box_and_block_yellow_height);
+    width: var(--box_and_block_yellow_width);
+}
+.on
+{
+    border : solid rgba(255, 255, 255, 0);
+}
+.clicked
+{
+    background-color: rgb(210, 255, 255);
+}
+.text_box
+{
+    border: solid rgba(255, 255, 255, 0);
+    background: rgba(255, 255, 255, 0);
+    width: 2.5vh;
+}
