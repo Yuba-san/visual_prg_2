@@ -71,6 +71,7 @@ body{
 #not_used{
     background-color: gray;
     background-image: url("./delete.png");
+    max-width: 40vh;
 }
 .add_block_button{
     width: 26vh;
