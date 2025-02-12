@@ -211,14 +211,12 @@ body{
 .black_box
 {
     display: inline-block;
-    border: dashed black;
+    border: dashed black ;
     min-width: 59vh;
     min-height: 4.7vh;
     position: relative;
     right: 3px;
     bottom: 3px;
-    padding-top: 30px;
-    padding-bottom: 10px;
 }
 .black_block
 {

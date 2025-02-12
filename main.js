@@ -296,7 +296,7 @@ function dataForButton(num) {
     dataForCreateElement.call(this)
     this.type = "button";
 
-    this.path = "body/#place_of_button/#button_row" + Math.floor(num / 16);
+    this.path = "body/#place_of_button/#button_row" + Math.floor(num / 18);
 
     aboutThatButton.call(this, num)
     this.className = `button_${this.getColor(num)} add_block_button`;
@@ -337,6 +337,14 @@ function textOfBlockAndButton() {
         {
             button: `if文  「もし」の文`,
             block: `もし${box.green}なら${br}${box.black}を実行する`
+        },
+        {
+            button: `else文 「もし上のif文が成立しなかったら」`,
+            block: `違ったら、${box.black}を実行する。`
+        },
+        {
+            button: `else if文 「もし上のif文が成立せず、もしこれが成立したら」`,
+            block: `違うかつ、もし${br}${box.green}なら${br}${box.black}を実行する`
         },
         {
             button: `for文  「繰り返し」の文`,
@@ -437,6 +445,22 @@ function textOfBlockAndButton() {
         {
             button: `変数:🍎`,
             block: `🍎`
+        },
+        {
+            button: `変数:⬆️`,
+            block: `⬆️`
+        },
+        {
+            button: `変数:➡️`,
+            block: `➡️`
+        },
+        {
+            button: `変数:⬇️`,
+            block: `⬇️`
+        },
+        {
+            button: `変数:⬅️`,
+            block: `⬅️`
         },
         {
             button: `自由入力`,
